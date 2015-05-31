@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/panel_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <com.etsy.android.grid.util.DynamicHeightImageView
+        android:id="@+id/gridImage"
+        android:layout_marginBottom = "2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Default Title"/>
+
+        <TextView
+            android:id="@+id/itemDistance"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemTitle"
+            android:text="0m"/>
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemTitle"
+            android:layout_toEndOf="@+id/itemDistance"
+            android:gravity="right"
+            android:text="$0.00"
+            android:textColor="@color/theme300" />
+
+    </RelativeLayout>
+
+</LinearLayout>

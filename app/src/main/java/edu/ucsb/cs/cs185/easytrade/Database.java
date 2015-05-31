@@ -1,11 +1,12 @@
 package edu.ucsb.cs.cs185.easytrade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by hzpkk520 on 15/5/29.
  */
-public class Database {
+public class Database implements Serializable {
 
     private ArrayList<User> myDatabase;
 

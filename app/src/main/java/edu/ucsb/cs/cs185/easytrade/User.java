@@ -1,10 +1,13 @@
 package edu.ucsb.cs.cs185.easytrade;
 
+import android.util.FloatMath;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class User {
+public class User implements Serializable{
 
     private String username;
     private String password;
@@ -13,6 +16,8 @@ public class User {
     private String monthOfBirth;
     private String yearOfBirth;
     private String address;
+    private float locationX;
+    private float locationY;
     private ArrayList<Item> postedItems;
     private ArrayList<Item> boughtItems;
 
@@ -24,11 +29,14 @@ public class User {
         monthOfBirth = "00";
         yearOfBirth = "0000";
         address = "NULL";
+        locationX = 0;
+        locationY = 0;
         postedItems = new ArrayList<Item>();
         boughtItems = new ArrayList<Item>();
     }
 
-    public User(String username, String password, String phoneNumber, String dayOfBirth, String monthOfBirth, String yearOfBirth, String address, ArrayList<Item> postedItems, ArrayList<Item> boughtItems) {
+    public User(String username, String password, String phoneNumber, String dayOfBirth, String monthOfBirth, String yearOfBirth, String address,
+                float locationX, float locationY, ArrayList<Item> postedItems, ArrayList<Item> boughtItems) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
@@ -36,6 +44,8 @@ public class User {
         this.monthOfBirth = monthOfBirth;
         this.yearOfBirth = yearOfBirth;
         this.address = address;
+        this.locationX = locationX;
+        this.locationY = locationY;
         this.postedItems = postedItems;
         this.boughtItems = boughtItems;
     }
@@ -96,6 +106,22 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public float getLocationX() {
+        return locationX;
+    }
+
+    public void setLocationX(float locationX) {
+        this.locationX = locationX;
+    }
+
+    public float getLocationY() {
+        return locationY;
+    }
+
+    public void setLocationY(float locationY) {
+        this.locationY = locationY;
     }
 
     public ArrayList<Item> getPostedItems() {
@@ -219,6 +245,14 @@ public class User {
     }
 
 
+    //Helper function
+
+    //Origin is the other user who is looking at this users item
+    public float getDistToOrigin(){
+        float x = this.getLocationX();
+        float y = this.getLocationY();
+        return FloatMath.sqrt(x * x + y * y);
+    }
 
     //----------------------------Overriding .equals for comparing two User objects------------------------------------------
 

@@ -1,19 +1,21 @@
 package edu.ucsb.cs.cs185.easytrade;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by hzpkk520 on 15/5/29.
  */
-public class Item {
+public class Item implements Serializable{
 
     private int itemID;
+    private String owner;
+    private boolean sold;
     private String itemTitle;
     private String category;
     private String price;
-    private float locationX;
-    private float locationY;
+    private String condition;
     private String description;
     private String dayOfPost;
     private String monthOfPost;
@@ -22,11 +24,12 @@ public class Item {
 
     public Item(){
         itemID = 0;
+        owner = "NULL";
+        sold = false;
         itemTitle = "NULL";
         category = "NULL";
         price = "00.00";
-        locationX = 0;
-        locationY = 0;
+        condition = "NULL";
         description = "NULL";
         dayOfPost = "00";
         monthOfPost = "00";
@@ -35,13 +38,14 @@ public class Item {
 
     }
 
-    public Item(int itemID, String itemTitle, String category, String price, float locationX, float locationY, String description, String dayOfPost, String monthOfPost, String yearOfPost, ArrayList<File> itemImages) {
+    public Item(int itemID, String owner, boolean sold, String itemTitle, String category, String price, String condition, String description, String dayOfPost, String monthOfPost, String yearOfPost, ArrayList<File> itemImages) {
         this.itemID = itemID;
+        this.owner = owner;
+        this.sold = sold;
         this.itemTitle = itemTitle;
         this.category = category;
         this.price = price;
-        this.locationX = locationX;
-        this.locationY = locationY;
+        this.condition = condition;
         this.description = description;
         this.dayOfPost = dayOfPost;
         this.monthOfPost = monthOfPost;
@@ -57,6 +61,22 @@ public class Item {
 
     public void setItemID(int itemID) {
         this.itemID = itemID;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     public String getItemTitle() {
@@ -81,22 +101,6 @@ public class Item {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public float getLocationX() {
-        return locationX;
-    }
-
-    public void setLocationX(float locationX) {
-        this.locationX = locationX;
-    }
-
-    public float getLocationY() {
-        return locationY;
-    }
-
-    public void setLocationY(float locationY) {
-        this.locationY = locationY;
     }
 
     public String getDescription() {
@@ -166,7 +170,7 @@ public class Item {
     }
 
     public boolean addAllImage(int index, ArrayList<File> c){
-        return itemImages.addAll(index,c);
+        return itemImages.addAll(index, c);
     }
 
     public File deleteImage(int position){
