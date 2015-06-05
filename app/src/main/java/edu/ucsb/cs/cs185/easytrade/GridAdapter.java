@@ -2,122 +2,117 @@ package edu.ucsb.cs.cs185.easytrade;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.etsy.android.grid.util.DynamicHeightImageView;
-import com.etsy.android.grid.util.DynamicHeightTextView;
+
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
- * Created by hzpkk520 on 15/5/30.
+ * Created by hzpkk520 on 15/6/3.
  */
-public class GridAdapter extends BaseAdapter {
-    private static final String TAG = "Debug";
-    private Context mContext;
+public class GridAdapter extends BaseAdapter  {
+    private Context context;
+    Item currentItem;
+    ImageView myGridImage;
+    TextView titleText;
+    TextView distanceText;
+    TextView priceText;
+    private ArrayList<User> mGridUsers;
 
-    static class ViewHolder {
-        DynamicHeightImageView myGridImage;
-        TextView titleText;
-        TextView distanceText;
-        TextView priceText;
+
+    public GridAdapter(Context context, ArrayList<User> mGridUsers) {
+        this.context = context;
+        this.mGridUsers = mGridUsers;
+        Log.d("Debug","GridAdapter Constructor called");
     }
 
-    private final LayoutInflater mLayoutInflater;
-    private final Random mRandom;
-    private Database adapterDatabase;
-//    private final ArrayList<Integer> mBackgroundColors;
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-    private static final SparseArray<Double> sPositionHeightRatios = new SparseArray<Double>();
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-    public GridAdapter(Context context, Database theDatabase) {
-//        super(context, imageViewResourceId);
-        adapterDatabase = theDatabase;
-        mContext = context;
-        mLayoutInflater = LayoutInflater.from(context);
-        mRandom = new Random();
+        View gridView;
+
+        if (convertView == null) {
+
+//            gridView = new View(context);
+
+            // get layout from mobile.xml
+            gridView = inflater.inflate(R.layout.single_grid, null);
+
+            myGridImage = (ImageView) gridView.findViewById(R.id.gridImage);
+            titleText = (TextView) gridView.findViewById(R.id.itemTitle);
+            distanceText = (TextView) gridView.findViewById(R.id.itemDistance);
+            priceText = (TextView) gridView.findViewById(R.id.itemPrice);
+
+            User currentUser = mGridUsers.get(position);
+            Log.d("Debug","the size of the user post item is "+ currentUser.getPostedItems().size());
+
+            currentItem = currentUser.getItemPost(0);
+            Log.d("Debug","Current Item ID: "+ currentItem.getItemID());
+
+
+            String tmpTitleText = currentItem.getItemTitle();
+            titleText.setText(tmpTitleText);
+            distanceText.setText(String.valueOf(Math.round(currentUser.getDistToOrigin()))+"m");
+            priceText.setText(currentItem.getPrice());
+
+
+        } else {
+            gridView = (View) convertView;
+            currentItem = mGridUsers.get(position).getItemPost(0);
+        }
+
+
+        switch (currentItem.getItemID()){
+            case 999900:
+                Picasso.with(parent.getContext()).load(R.drawable.bookshelf1).
+                        resize(150,200).centerCrop().into(myGridImage);
+                return gridView;
+            case 999901:
+                Picasso.with(parent.getContext()).load(R.drawable.comfortablemattress1).
+                        resize(150,200).centerCrop().into(myGridImage);
+                return gridView;
+            case 999902:
+                Picasso.with(parent.getContext()).load(R.drawable.bikinis1).
+                        resize(150,200).centerCrop().into(myGridImage);
+                return gridView;
+            case 999903:
+                Picasso.with(parent.getContext()).load(R.drawable.randomclothes1).
+                        resize(150,200).centerCrop().into(myGridImage);
+                return gridView;
+            case 999904:
+                Picasso.with(parent.getContext()).load(R.drawable.minifridge1).
+                        resize(150,200).centerCrop().into(myGridImage);
+                return gridView;
+        }
+
+        Picasso.with(parent.getContext()).load(currentItem.getImage(0)).
+                resize(150,200).centerCrop().into(myGridImage);
+        return gridView;
     }
 
-
-    public void add(User user){
-        adapterDatabase.add(user);
-    }
-
+    @Override
     public int getCount() {
-        return MainActivity.EasyTradeDataBase.size();
+        return mGridUsers.size();
     }
 
-    public long getItemId(int position) {
-        return 0;
-    }
-
+    @Override
     public Object getItem(int position) {
         return null;
     }
 
-
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent) {
-
-        ViewHolder vh;
-        if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.single_grid, parent, false);
-            vh = new ViewHolder();
-            vh.myGridImage = (DynamicHeightImageView) convertView.findViewById(R.id.gridImage);
-            vh.titleText = (TextView) convertView.findViewById(R.id.title);
-            vh.distanceText = (TextView) convertView.findViewById(R.id.itemDistance);
-            vh.priceText = (TextView) convertView.findViewById(R.id.itemPrice);
-
-            convertView.setTag(vh);
-        }
-        else {
-            vh = (ViewHolder) convertView.getTag();
-        }
-
-        double positionHeight = getPositionRatio(position);
-
-
-        Log.d(TAG, "getView position:" + position + " h:" + positionHeight);
-
-
-        Item currentItem = MainActivity.EasyTradeDataBase.get(position).getItemPost(0);
-        vh.myGridImage.setHeightRatio(positionHeight);
-        Picasso.with(convertView.getContext()).load(currentItem.getImage(0))
-                .resize(convertView.getWidth(),convertView.getHeight()-38).centerCrop().into(vh.myGridImage);
-//        vh.myGridImage.setImageBitmap();
-        vh.titleText.setText(currentItem.getItemTitle());
-        vh.distanceText.setText(String.valueOf(Math.round(MainActivity.EasyTradeDataBase.get(position).getDistToOrigin())));
-        vh.priceText.setText(currentItem.getPrice());
-
-        return convertView;
+    public long getItemId(int position) {
+        return 0;
     }
 
-    private double getPositionRatio(final int position) {
-        double ratio = sPositionHeightRatios.get(position, 0.0);
-        // if not yet done generate and stash the columns height
-        // in our real world scenario this will be determined by
-        // some match based on the known height and width of the image
-        // and maybe a helpful way to get the column height!
-        if (ratio == 0) {
-            ratio = getRandomHeightRatio();
-            sPositionHeightRatios.append(position, ratio);
-            Log.d(TAG, "getPositionRatio:" + position + " ratio:" + ratio);
-        }
-        return ratio;
-    }
 
-    private double getRandomHeightRatio() {
-        return (mRandom.nextDouble() / 2.0) + 1.0; // height will be 1.0 - 1.5 the width
-    }
 }

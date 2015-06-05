@@ -21,6 +21,7 @@ public class Item implements Serializable{
     private String monthOfPost;
     private String yearOfPost;
     private ArrayList<File> itemImages;
+    private ArrayList<Integer> drawablesForSampleUsers;
 
     public Item(){
         itemID = 0;
@@ -35,6 +36,8 @@ public class Item implements Serializable{
         monthOfPost = "00";
         yearOfPost = "00";
         itemImages = new ArrayList<File>();
+        drawablesForSampleUsers = new ArrayList<Integer>();
+
 
     }
 
@@ -51,6 +54,7 @@ public class Item implements Serializable{
         this.monthOfPost = monthOfPost;
         this.yearOfPost = yearOfPost;
         this.itemImages = itemImages;
+        drawablesForSampleUsers = new ArrayList<Integer>();
     }
 
     //----------------------------Getters and Setters------------------------------------------
@@ -103,6 +107,14 @@ public class Item implements Serializable{
         this.price = price;
     }
 
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -141,6 +153,15 @@ public class Item implements Serializable{
 
     public void setItemImages(ArrayList<File> itemImages) {
         this.itemImages = itemImages;
+    }
+
+
+    public ArrayList<Integer> getDrawablesForSampleUsers() {
+        return drawablesForSampleUsers;
+    }
+
+    public void setDrawablesForSampleUsers(ArrayList<Integer> drawablesForSampleUsers) {
+        this.drawablesForSampleUsers = drawablesForSampleUsers;
     }
 
     //----------------------------End of Getters and Setters------------------------------------------
@@ -214,5 +235,6 @@ public class Item implements Serializable{
             return  true;
         return false;
     }
+
 
 }

@@ -4,7 +4,6 @@ import android.util.FloatMath;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class User implements Serializable{
