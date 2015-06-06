@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background = "#FFF"
+    >
+
+    <TextView
+        android:id="@+id/cong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Congratulations!"
+        android:textColor="#009688"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cong"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="20dp"
+        android:text="You can now contact the seller about this item."
+        android:layout_centerHorizontal="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/sellerInfo"
+        android:layout_below="@+id/notice"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:elevation="5dp"
+        android:background = "@drawable/border_layout">
+
+        <TextView
+            android:id="@+id/sellerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:text="Seller Name"
+            android:textColor="#000"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sellerId"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="22dp"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:text="(805)886-4567"
+            />
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phoneNumber"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:text="6521 Cordoba Road Apt#10"
+            />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/divideLine"
+        android:layout_below="@id/sellerInfo"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divideLine"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="2dp"
+        android:text="The item information has been automatically saved into your order history."
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background = "#FFF"
+        >
+
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Back to Main page"
+            android:textColor="#FFF"
+            android:background="@drawable/rounded_button"
+            android:onClick="openMainActivity"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

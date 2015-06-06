@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:background = "#80CBC4">
+        <TextView
+            android:id="@+id/sellerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seller: "
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:id="@+id/seller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/sellerId"
+            android:layout_centerVertical="true"
+            android:text="SellerName"
+            />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/header"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/keyboard2"
+        />
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_toEndOf="@+id/itemImage"
+        android:layout_below="@+id/header"
+        android:textSize="15sp"
+        android:text="Title "
+        android:textStyle="bold|normal"
+        />
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/itemImage"
+        android:layout_below="@+id/itemTitle"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text=" $00.00"
+        />
+    <TextView
+        android:id="@+id/itemCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemPrice"
+        android:layout_toEndOf="@+id/itemImage"
+        android:text="Used Condition"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        />
+    <View
+        android:id="@+id/itemDivideLine"
+        android:layout_below="@id/itemImage"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+    <TextView
+        android:id="@+id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemDivideLine"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="SUMMARY"
+        />
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/summary"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:text="Total: "
+        android:textSize="15sp"
+        />
+    <TextView
+        android:id="@+id/itemPrice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="$00.00"
+        android:layout_alignTop="@+id/total"
+        android:layout_alignEnd="@+id/itemTitle" />
+
+    <RelativeLayout
+        android:id="@+id/rooter"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background = "#FFF">
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_button"
+            android:text="Confirm"
+            android:textSize="15sp"
+            android:textColor="#FFF"
+            android:onClick="openSuccessActivity"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

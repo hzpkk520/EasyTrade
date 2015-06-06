@@ -1,5 +1,27 @@
 package edu.ucsb.cs.cs185.easytrade;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,26 +33,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Locale;
-
-import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -59,6 +61,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.d("Debug","MAINACTIVITY ONCREATE CALLED");
 
         //Read saved Database from local storage
         try
@@ -137,11 +141,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             .setTabListener(this));
         }
 
-        if (EasyTradeDataBase.isEmpty()){
-            Log.d(TAG,"EasyTradeDataBase is still empty!");
-        }
 
     }
+
+
 
     @Override
     public void onStop() {
@@ -255,7 +258,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public static String USERNAME_TO_PASS;
 
         private GridView mGridView;
-        private GridAdapter mAdapter;
+        public static GridAdapter mAdapter;
         public ArrayList<User> usersShownInGrid;
 
         /**
@@ -289,7 +292,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setRetainInstance(true);
+//            setRetainInstance(true);
 
             Log.d(TAG, "calling onCreate in StaggeredFragment");
 
@@ -299,30 +302,38 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public void onActivityCreated(final Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
+
+
             Log.d(TAG, "calling onActivityCreated in StaggeredFragment");
             mGridView = (GridView) getActivity().findViewById(R.id.grid_view);
 
             usersShownInGrid = getUsersShownInGrid();
+            Log.d(TAG,"SIZE of usersShownInGrid is: "+usersShownInGrid.size());
 
-            if (mAdapter == null) {
-                mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
-            }
-            
+//            if (mAdapter == null) {
+//                mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
+//            }
+            mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
 
             Log.d(TAG,"setting Adapter for mGridView in StaggeredFragment");
-            Log.d(TAG,"the size of the data base is "+ EasyTradeDataBase.size());
+            Log.d(TAG, "the size of the data base is " + EasyTradeDataBase.size());
 
             mGridView.setAdapter(mAdapter);
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
                     USERNAME_TO_PASS = usersShownInGrid.get(position).getUsername();
+                    Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
+                    intent.putExtra("userName", USERNAME_TO_PASS);
+//                    intent.putExtra("parentActivity",0);
                     Toast.makeText(getActivity(), "Item "+ position + " clicked", Toast.LENGTH_SHORT).show();
 
+                    getActivity().startActivity(intent);
                 }
             });
 
         }
+
 
 
         public ArrayList<User> getUsersShownInGrid(){
@@ -371,6 +382,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private ListView listView;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -390,14 +402,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            GridView staggeredGridView = (GridView)rootView.findViewById(R.id.grid_view);
-            staggeredGridView.setVisibility(View.GONE);
+            View rootView = inflater.inflate(R.layout.fragment_sellerinfo, container, false);
 
-            TextView theTextView = (TextView)rootView.findViewById(R.id.section_label);
-            int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-            theTextView.setText("Section " + sectionNumber);
-
+            listView = (ListView) rootView.findViewById(R.id.listview);
+            listView.setAdapter(new listViewAdapter(this, new String[] { "Bought items",
+                    "Sold items" }));
             return rootView;
         }
     }
@@ -428,17 +437,19 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void sortData(){
         fileCompare my_compare = new fileCompare();
         Collections.sort(EasyTradeDataBase.getMyDatabase(), my_compare);
+        if (GridFragment.mAdapter != null)
+            GridFragment.mAdapter.notifyDataSetChanged();
     }
 
 
 
 
     public void loadInDefaultData(){
-        User user0 = new User("JackBacon","000000","(805)878-3652","21","02","1991","6636 Trigo Rd., #10",3,4,new ArrayList<Item>(),new ArrayList<Item>());
-        User user1 = new User("ScottCesar","000000","(805)708-6878","25","03","1992","6675 Sabado Rd., #2",5,7,new ArrayList<Item>(),new ArrayList<Item>());
-        User user2 = new User("JenniChou","000000","(805)252-0086","21","05","1993","6722 Del Playa Rd., #30",9,1,new ArrayList<Item>(),new ArrayList<Item>());
-        User user3 = new User("KobeHollerer","000000","(805)356-4332","11","11","1981","6621 Abrego Rd., #9",2,3,new ArrayList<Item>(),new ArrayList<Item>());
-        User user4 = new User("CoryFeitelson","000000","(805)708-0991","10","03","1992","6654 Picasso  Rd., #4",8,6,new ArrayList<Item>(),new ArrayList<Item>());
+        User user0 = new User("JackBacon","000000","(805)878-3652","21","02","1991","6636 Trigo Rd., #10",30,4,new ArrayList<Item>(),new ArrayList<Item>());
+        User user1 = new User("ScottCesar","000000","(805)708-6878","25","03","1992","6675 Sabado Rd., #2",50,70,new ArrayList<Item>(),new ArrayList<Item>());
+        User user2 = new User("JenniChou","000000","(805)252-0086","21","05","1993","6722 Del Playa Rd., #30",95,100,new ArrayList<Item>(),new ArrayList<Item>());
+        User user3 = new User("KobeHollerer","000000","(805)356-4332","11","11","1981","6621 Abrego Rd., #9",22,35,new ArrayList<Item>(),new ArrayList<Item>());
+        User user4 = new User("CoryFeitelson","000000","(805)708-0991","10","03","1992","6654 Picasso  Rd., #4",800,255,new ArrayList<Item>(),new ArrayList<Item>());
 
         Item item0 = new Item(999900,"JackBacon",false,"Book Shelf for Sale","Furniture","$55","Little Damaged",
                 "This bookshelf is bought one year ago. It is pretty much still in good shape. If you are interested, please don't hesitate to contact me!",

@@ -57,6 +57,16 @@ public class Database implements Serializable {
         return myDatabase.get(position);
     }
 
+    public User get(String userName){
+        for (User tmpUser: myDatabase){
+            Log.d("Debug","Checking this user: "+tmpUser.getUsername());
+            if (tmpUser.getUsername().equals(userName)){
+                return tmpUser;
+            }
+        }
+        return null;
+    }
+
     public void add(User tmpUser){
         if (indexOf(tmpUser)== -1)
             myDatabase.add(tmpUser);
@@ -81,6 +91,13 @@ public class Database implements Serializable {
         return tmp;
     }
 
+    public boolean delete(String userName){
+        User tmp = get(userName);
+        boolean tmp1 = myDatabase.remove(tmp);
+        sortData();
+        return tmp1;
+    }
+
     public User delete(int position){
         User tmpUser = myDatabase.remove(position);
         sortData();
@@ -95,6 +112,7 @@ public class Database implements Serializable {
 
     public void clear(){
         myDatabase.clear();
+        sortData();
     }
 
     public boolean contains(User user){
@@ -143,6 +161,8 @@ public class Database implements Serializable {
     public void sortData(){
         fileCompare my_compare = new fileCompare();
         Collections.sort(myDatabase, my_compare);
+        if (MainActivity.GridFragment.mAdapter != null)
+            MainActivity.GridFragment.mAdapter.notifyDataSetChanged();
     }
 
 }

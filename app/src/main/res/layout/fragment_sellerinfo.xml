@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/theme100"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="PUBLIC PROFILE"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/user" />
+
+            <TextView
+                android:id="@+id/sellerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userImage"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/userImage"
+                android:text="Ziping He"
+                android:textSize="21sp" />
+
+            <View
+                android:id="@+id/divideLine"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerName"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+            <ImageView
+                android:id="@+id/userPhoneNum"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/divideLine"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/phone" />
+
+            <TextView
+                android:id="@+id/sellerPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userPhoneNum"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/userPhoneNum"
+                android:text="(805)886-4549"
+                android:textSize="21sp" />
+
+            <View
+                android:id="@+id/divideLine2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerPhone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+            <ImageView
+                android:id="@+id/userEmail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/divideLine2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mail" />
+
+            <TextView
+                android:id="@+id/sellerEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userEmail"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/userEmail"
+                android:text="ziping@umail.ucsb.edu"
+                android:textSize="21sp" />
+
+            <View
+                android:id="@+id/divideLine3"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerEmail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+            <ImageView
+                android:id="@+id/userAddress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/divideLine3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/location2" />
+
+            <TextView
+                android:id="@+id/sellerAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userAddress"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/userAddress"
+                android:text="6521 Cordoba Rd APT#12"
+                android:textSize="21sp" />
+
+            <View
+                android:id="@+id/divideLine4"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerAddress"
+                android:layout_marginTop="15dp"
+                android:background="#BDBDBD" />
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/header2"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_below="@+id/divideLine4"
+                android:background="@color/theme100"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="BUY and SELL"
+                    android:textColor="#000" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_below="@id/header2"
+
+                >
+            </ListView>
+
+            <View
+                android:id="@+id/blankArea"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/listview"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/postButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/rounded_button"
+        android:text="I want to post items"
+        android:textColor="#FFF"
+        android:textSize="22sp" />
+
+
+</RelativeLayout>
