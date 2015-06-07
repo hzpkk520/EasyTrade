@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Your Name:"
+            android:textColor="#000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Your Phone:"
+            android:textColor="#000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Your Email:"
+            android:textColor="#000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -80,13 +83,14 @@
             android:layout_marginRight="5dp"
             android:hint=""
             android:imeOptions="actionDone"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
         >
         <TextView
             android:id="@+id/lbl_score2"
@@ -94,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Your Address:"
+            android:textColor="#000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 

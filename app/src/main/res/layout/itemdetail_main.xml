@@ -54,7 +54,7 @@
                 android:layout_below="@+id/devideLine"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/bikinis1" />
+                android:src="@drawable/minion" />
 
             <TextView
                 android:id="@+id/listedBy"

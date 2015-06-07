@@ -221,19 +221,28 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         TextView sellerAddress = (TextView) findViewById(R.id.sellerAddress);
 
 
-        sellerName.setText(value1);
-        sellerPhone.setText(value2);
-        sellerEmail.setText(value3);
-        sellerAddress.setText(value4);
+        if (!value1.equals("")){
+            sellerName.setText(value1);
+        }
+        if (!value2.equals("")){
+            sellerPhone.setText(value2);
+        }
+        if (!value3.equals("")){
+            sellerEmail.setText(value3);
+        }
+        if (!value4.equals("")){
+            sellerAddress.setText(value4);
+        }
+
 
         User theCurrentUserInDatabase = EasyTradeDataBase.get(CurrentUser.getUsername());
-        CurrentUser.setUsername(value1);
-        theCurrentUserInDatabase.setUsername(value1);
-        CurrentUser.setPhoneNumber(value2);
-        theCurrentUserInDatabase.setPhoneNumber(value2);
-        CurrentUser.setAddress(value4);
-        theCurrentUserInDatabase.setAddress(value4);
-        return;
+        CurrentUser.setUsername(sellerName.getText().toString());
+        theCurrentUserInDatabase.setUsername(sellerName.getText().toString());
+        CurrentUser.setPhoneNumber(sellerPhone.getText().toString());
+        theCurrentUserInDatabase.setPhoneNumber(sellerPhone.getText().toString());
+        CurrentUser.setAddress(sellerAddress.getText().toString());
+        theCurrentUserInDatabase.setAddress(sellerAddress.getText().toString());
+
     }
 
     /**
@@ -391,37 +400,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public ArrayList<User> getUsersShownInGrid() {
             return EasyTradeDataBase.getCurrentUsers();
         }
-//        @Override
-//        public void onScrollStateChanged(final AbsListView view, final int scrollState) {
-//            Log.d(TAG, "onScrollStateChanged:" + scrollState);
-//        }
-//
-//        @Override
-//        public void onScroll(final AbsListView view, final int firstVisibleItem, final int visibleItemCount, final int totalItemCount) {
-//            Log.d(TAG, "onScroll firstVisibleItem:" + firstVisibleItem +
-//                    " visibleItemCount:" + visibleItemCount +
-//                    " totalItemCount:" + totalItemCount);
-//            if(firstVisibleItem + visibleItemCount >= totalItemCount){
-//                // End has been reached
-//            }
-////            // our handling
-////            if (!mHasRequestedMore) {
-////                int lastInScreen = firstVisibleItem + visibleItemCount;
-////                if (lastInScreen >= totalItemCount) {
-////                    Log.d(TAG, "onScroll lastInScreen - so load more");
-////                    mHasRequestedMore = true;
-////                    onLoadMoreItems();
-////                }
-////            }
-//        }
-//
-//        @Override
-//        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-//            myView = view;
-//            Toast.makeText(getActivity(), "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-//        }
-
-
     }
 
 
@@ -436,6 +414,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         private static final String ARG_SECTION_NUMBER = "section_number";
         private ListView listView;
         private Button editProfile;
+        private TextView sellerName,sellerPhone,sellerEmail,sellerAddress;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -456,6 +435,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_sellerinfo, container, false);
+            sellerName = (TextView)rootView.findViewById(R.id.sellerName);
+            sellerPhone = (TextView)rootView.findViewById(R.id.sellerPhone);
+            sellerEmail = (TextView)rootView.findViewById(R.id.sellerEmail);
+            sellerAddress = (TextView)rootView.findViewById(R.id.sellerAddress);
+
+            sellerName.setText(CurrentUser.getUsername());
+            sellerPhone.setText(CurrentUser.getPhoneNumber());
+            sellerAddress.setText(CurrentUser.getAddress());
 
             editProfile = (Button) rootView.findViewById(R.id.editButton);
             editProfile.setOnClickListener(new View.OnClickListener() {

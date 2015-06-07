@@ -60,10 +60,13 @@ public class EditFragment extends DialogFragment {
         edit3 = (EditText) view.findViewById(R.id.txt_team2);
         edit4 = (EditText) view.findViewById(R.id.txt_score2);
 
+        edit1.setHint("GiantJason");
+        edit2.setHint("8057083605");
+        edit3.setHint("jasonG@gmail.com");
+        edit4.setHint("6621 Abrego Rd., Apt.303");
+
         edit1.requestFocus();
-        edit2.requestFocus();
-        edit3.requestFocus();
-        edit4.requestFocus();
+
 
         builder.setView(view)
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
@@ -76,7 +79,7 @@ public class EditFragment extends DialogFragment {
                         String value3 = edit3.getText().toString();
                         String value4 = edit4.getText().toString();
 
-                        if (value2.length() > 10) {
+                        if (value2.length() >= 10) {
                             value2 = new StringBuilder(value2).insert(0, "(").toString();
                             value2 = new StringBuilder(value2).insert(4, ")").toString();
                             value2 = new StringBuilder(value2).insert(8, "-").toString();
@@ -98,16 +101,16 @@ public class EditFragment extends DialogFragment {
 //                            builder.show();
 //                        }
                         if (value1.equals("")) {
-                            value1 = "Unknown";
+                            value1 = "";
                         }
                         if (value2.equals("")) {
-                            value2 = "Unknown";
+                            value2 = "";
                         }
                         if (value3.equals("")) {
-                            value3 = "Unknown";
+                            value3 = "";
                         }
                         if (value4.equals("")) {
-                            value4 = "Unknown";
+                            value4 = "";
                         }
 
                         mListener.onDialogPositiveClick(EditFragment.this, value1, value2, value3, value4);

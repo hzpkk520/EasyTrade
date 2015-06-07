@@ -68,6 +68,11 @@ public class User implements Serializable{
     }
 
     public String getPhoneNumber() {
+        if (phoneNumber.length() >= 10 && !phoneNumber.contains("(")) {
+            phoneNumber = new StringBuilder(phoneNumber).insert(0, "(").toString();
+            phoneNumber = new StringBuilder(phoneNumber).insert(4, ")").toString();
+            phoneNumber = new StringBuilder(phoneNumber).insert(8, "-").toString();
+        }
         return phoneNumber;
     }
 

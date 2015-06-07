@@ -19,8 +19,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="PUBLIC PROFILE"
-            android:textColor="#000" />
+            android:text="My Profile"
+            android:textAllCaps="true"
+            android:textColor="#000"
+            android:textStyle="bold"/>
         <Button
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
@@ -58,7 +60,7 @@
                 android:layout_alignBottom="@+id/userImage"
                 android:layout_marginLeft="20dp"
                 android:layout_toEndOf="@+id/userImage"
-                android:text="Ziping He"
+                android:text="Zixia Weng"
                 android:textSize="21sp" />
 
             <View
@@ -116,7 +118,7 @@
                 android:layout_alignBottom="@+id/userEmail"
                 android:layout_marginLeft="20dp"
                 android:layout_toEndOf="@+id/userEmail"
-                android:text="ziping@umail.ucsb.edu"
+                android:text="zixia@umail.ucsb.edu"
                 android:textSize="21sp" />
 
             <View
@@ -169,8 +171,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:text="BUY and SELL"
-                    android:textColor="#000" />
+                    android:text="My Items"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textStyle="bold"/>
             </RelativeLayout>
 
             <ListView
