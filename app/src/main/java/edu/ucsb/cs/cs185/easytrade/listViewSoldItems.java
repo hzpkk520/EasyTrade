@@ -19,7 +19,7 @@ public class listViewSoldItems extends ActionBarActivity {
 
         User userPassedIn = MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername());
         Log.d("Debug", "=====" + userPassedIn.getUsername());
-        String[] strings = {"","","","",""};
+        String[] strings = new String[10];
         Log.d("Debug", "boughtItem size is" + userPassedIn.getBoughtItems().size());
         for(int i = 0; i<userPassedIn.getPostedItems().size();i++){
             strings[i] = userPassedIn.getPostedItems().get(i).getItemTitle();
