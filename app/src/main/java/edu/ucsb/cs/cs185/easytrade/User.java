@@ -153,11 +153,13 @@ public class User implements Serializable{
     }
 
     public void addItemPost(Item element){
-        postedItems.add(element);
+        if (!postedItems.contains(element))
+            postedItems.add(element);
     }
 
     public void addItemPost(int position, Item element){
-        postedItems.add(position,element);
+        if (!postedItems.contains(element))
+            postedItems.add(position,element);
     }
 
     public boolean addAllPost(ArrayList<Item> c){
@@ -265,7 +267,7 @@ public class User implements Serializable{
         }
 
         User other = (User)obj;
-        if (other.getUsername() == this.getUsername())
+        if (other.getUsername().equals(this.getUsername()) )
             return  true;
         return false;
     }

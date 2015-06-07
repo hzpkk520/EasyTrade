@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,7 +56,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     public static Database EasyTradeDataBase;
 
-    public static User CurrentUser;
+    public static User  CurrentUser = new User("zixiaweng","123456","8058864549","02","07","1995","6521 Cordoba Rd., #30",0,0,
+            new ArrayList<Item>(),new ArrayList<Item>());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,25 +89,29 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         if (EasyTradeDataBase == null){
             Log.d("Debug", "Database not found :( ");
             EasyTradeDataBase = new Database();
-
             loadInDefaultData();
 
         }
-        else if (EasyTradeDataBase != null)
+        else if (EasyTradeDataBase != null) {
             Log.d("Debug", "Database FOUND!! ( ⊙o⊙ ) ");
-
+            Log.d("Debug", "The Size of the Database is: "+EasyTradeDataBase.size());
+        }
 
         if (EasyTradeDataBase.isEmpty()){
             Log.d(TAG,"The Read Database is Empty");
-
+            EasyTradeDataBase.add(CurrentUser);
             loadInDefaultData();
         }
+
+        Log.d("Debug","Before adding Current User");
+
+        User tmpCurrentUser = EasyTradeDataBase.get(CurrentUser.getUsername());
+        EasyTradeDataBase.add(CurrentUser);
 
 
         sortData();
 
-        CurrentUser = new User("zixiaweng","123456","8058864549","02","07","1995","6521 Cordoba Rd., #30",0,0,
-                new ArrayList<Item>(),new ArrayList<Item>());
+
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -316,7 +322,23 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
 
             Log.d(TAG,"setting Adapter for mGridView in StaggeredFragment");
-            Log.d(TAG, "the size of the data base is " + EasyTradeDataBase.size());
+            Log.d(TAG, "THE SIZE OF THE DATABASE IS: " + EasyTradeDataBase.size());
+            Log.d(TAG, EasyTradeDataBase.toString());
+            Log.d(TAG, "JACKBACON's bought arraylist size is: " + EasyTradeDataBase.get("JackBacon").getBoughtItems().size());
+
+            Log.d(TAG, "Current user's postedItem arraylist size is: " + CurrentUser.getPostedItems().size());
+            Log.d(TAG, "Current user's bought arraylist size is: " + CurrentUser.getBoughtItems().size());
+            if(CurrentUser.getPostedItems().size()>1){
+
+//                CurrentUser.getPostedItems().remove(0);
+                Log.d(TAG, "Current user's postedItem is more than 1 item and I am going to delete the first one: " + CurrentUser.getPostedItems().size());
+            }
+            if (CurrentUser.getPostedItems().size()!=0){
+                Log.d(TAG, "THE TITLE OF CURRENTUSER'S POSTED ITEM IS: " + CurrentUser.getPostedItems().get(CurrentUser.getPostedItems().size()-1).getItemTitle());
+            }
+            if (CurrentUser.getBoughtItems().size()!=0){
+                Log.d(TAG, "THE TITLE OF CURRENTUSER'S BOUGHT ITEM IS: " + CurrentUser.getBoughtItems().get(CurrentUser.getBoughtItems().size()-1).getItemTitle());
+            }
 
             mGridView.setAdapter(mAdapter);
             mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -405,8 +427,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             View rootView = inflater.inflate(R.layout.fragment_sellerinfo, container, false);
 
             listView = (ListView) rootView.findViewById(R.id.listview);
-            listView.setAdapter(new listViewAdapter(this, new String[] { "Bought items",
-                    "Sold items" }));
+            listView.setAdapter(new listViewAdapter(this, new String[]{"Bought items",
+                    "Sold items"}));
+            Button postButton = (Button) rootView.findViewById(R.id.postButton);
+            postButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), SellingActivity.class);
+                    //  intent.putExtra("path", image.getAbsolutePath());
+                    getActivity().startActivity(intent);
+                }
+            });
             return rootView;
         }
     }
@@ -511,7 +542,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 //        File file1User0 = convertDrawableToFile(drawable);
 
         item.getDrawablesForSampleUsers().add(drawable);
-        user.getPostedItems().add(item);
+        user.addItemPost(item);
         EasyTradeDataBase.add(user);
     }
 

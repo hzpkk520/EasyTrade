@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/theme100"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="ITEM INFORMATION"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:layout_below="@+id/header">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:textSize="20dp"
+                android:text="Title:"
+                android:id="@+id/userImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                />
+
+
+            <EditText
+                android:hint="ie. chair"
+                android:id="@+id/edit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userImage"
+                android:layout_marginLeft="100dp"
+                android:layout_toEndOf="@+id/userImage"
+
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/divideLine"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/edit_title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+            <TextView
+                android:text="Price:"
+                android:textSize="20dp"
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divideLine"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <EditText
+                android:inputType="number"
+                android:hint="ie. 80 USD"
+                android:id="@+id/sellerPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText2"
+                android:layout_alignLeft="@id/edit_title"
+                android:layout_toEndOf="@+id/editText2"
+
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/divideLine2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerPhone"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+            <TextView
+                android:textSize="18dp"
+                android:text="Condition:"
+                android:id="@+id/userEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divideLine2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                 />
+
+            <EditText
+                android:hint="ie. brand new"
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userEmail"
+                android:layout_alignLeft="@id/edit_title"
+                android:layout_toEndOf="@+id/userEmail"
+
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/divideLine3"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/editText3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+
+
+
+            <TextView
+                android:text="Category"
+                android:textSize="18dp"
+                android:id="@+id/userAddress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/divideLine3" />
+
+            <AutoCompleteTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:hint="this is AutoComplete"
+                android:id="@+id/sellerAddress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/userAddress1"
+                android:layout_alignLeft="@id/edit_title"
+                android:layout_toEndOf="@+id/userAddress1"
+
+                android:textSize="15sp" />
+            <View
+                android:id="@+id/divideLine6"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/sellerAddress1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#E0E0E0" />
+            <TextView
+                android:text="Description:"
+                android:textSize="18dp"
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/divideLine6" />
+
+            <EditText
+                android:hint="ie. four-lag chair.."
+                android:id="@+id/category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="185dp"
+                android:layout_alignLeft="@id/edit_title"
+                android:layout_toEndOf="@+id/userAddress1"
+                android:lines="3"
+
+                android:textSize="15sp" />
+
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <Button
+        android:onClick="next_step"
+        android:id="@+id/postButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+android:background="@drawable/button_bg"
+        android:text="Continue"
+        android:textColor="#FFF"
+        android:textSize="22sp" />
+
+
+</RelativeLayout>

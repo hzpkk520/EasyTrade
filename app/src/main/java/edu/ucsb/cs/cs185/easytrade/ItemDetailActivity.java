@@ -70,7 +70,7 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
 
         User user = MainActivity.EasyTradeDataBase.get(userName);
         Log.d("Debug", "current user name is " + user.getUsername());
-        item = user.getPostedItems().get(0);
+        item = user.getItemPost(user.getPostedItems().size()-1);
         itemID = item.getItemID();
         drawableArray = item.getDrawablesForSampleUsers();
         arraySize = drawableArray.size();

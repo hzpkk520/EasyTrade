@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:weightSum="1">
+<TextView
+    android:textSize="30dp"
+    android:text="Fill  Your  Item  Info"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/fill_info"
+    android:layout_width="300dp"
+    android:layout_height="80dp"
+    android:layout_above="@+id/button"
+    android:layout_centerHorizontal="true" />
+
+    <Button
+
+        android:layout_marginBottom="15dp"
+        android:textColor="#FFFFFF"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+       android:text="Continue"
+        android:background="@drawable/button_bg"
+        android:layout_weight="0.08"
+        android:layout_gravity="left|center_vertical"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="next_step"/>
+
+    <TextView
+
+        android:padding="10dp"
+        android:id="@+id/title"
+        android:text="Title:"
+        android:textSize="25dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left|top"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:padding="10dp"
+        android:hint="Set Your Title"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/edit_title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/used_condition"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:padding="10dp"
+        android:id="@+id/item_info"
+        android:text="Item Info:"
+        android:textSize="25dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+
+
+        android:layout_below="@+id/location"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:hint="Add Your Description"
+        android:layout_width="dp"
+        android:layout_height="100dp"
+        android:id="@+id/editText2"
+
+        android:layout_below="@+id/location"
+        android:layout_toRightOf="@+id/item_info"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+
+        android:padding="10dp"
+        android:id="@+id/price"
+        android:text="Price:"
+        android:textSize="25dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_marginTop="5dp"
+        android:hint="Set Your Price"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+
+        android:id="@+id/editText3"
+        android:layout_below="@+id/edit_title"
+        android:layout_alignLeft="@+id/edit_title"
+        android:layout_alignStart="@+id/edit_title"
+        android:layout_alignRight="@+id/edit_title"
+        android:layout_alignEnd="@+id/edit_title" />
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/used_condition"
+        android:text="Condition:"
+        android:textSize="25dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/price"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_marginTop="7dp"
+        android:hint="Set Item Condition"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/editText4"
+        android:layout_below="@+id/editText3"
+        android:layout_toRightOf="@+id/used_condition"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignEnd="@+id/editText3" />
+
+    <TextView
+        android:layout_marginTop="7dp"
+        android:padding="10dp"
+        android:id="@+id/location"
+        android:text="Location:"
+        android:textSize="25dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/used_condition"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+<EditText
+    android:layout_marginTop="7dp"
+    android:hint="Set Your Location"
+    android:layout_width="200dp"
+    android:layout_height="50dp"
+    android:id="@+id/editText5"
+    android:layout_below="@+id/editText4"
+    android:layout_toRightOf="@+id/used_condition"
+    android:layout_alignRight="@+id/editText4"
+    android:layout_alignEnd="@+id/editText4" />
+
+    <View
+        android:id="@+id/vertical1"
+        android:layout_marginTop="41dp"
+        android:background="@color/theme500"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <View
+        android:id="@+id/vertical5"
+        android:layout_marginTop="210dp"
+        android:background="@color/theme500"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <View
+        android:id="@+id/vertical4"
+        android:layout_marginTop="153dp"
+        android:background="@color/theme500"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <View
+        android:id="@+id/vertical3"
+        android:layout_marginTop="96dp"
+        android:background="@color/theme500"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <View
+        android:id="@+id/vertical2"
+        android:layout_marginTop="298dp"
+        android:background="@color/theme500"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View
+
+       android:id="@+id/hertical"
+        android:background="@color/theme500"
+        android:layout_height="300dp"
+        android:layout_width="2dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button" />
+
+</RelativeLayout>

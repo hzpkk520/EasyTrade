@@ -43,7 +43,8 @@
 
 
         </activity>
-
+        <activity android:name=".SellingActivity2"  android:focusableInTouchMode="true" android:clickable="true"> </activity>
+        <activity android:name=".SellingActivity"  android:focusableInTouchMode="true" android:clickable="true"> </activity>
         <activity
             android:name=".tradeSuccess"
             android:configChanges="orientation"

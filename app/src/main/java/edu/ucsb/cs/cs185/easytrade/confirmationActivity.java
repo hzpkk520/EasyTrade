@@ -82,20 +82,19 @@ public class confirmationActivity extends ActionBarActivity {
         // Do something in response to button
         String userName = seller.getText().toString();
         User itemOwner =  MainActivity.EasyTradeDataBase.get(userName);
-        Item thisSellingItem = itemOwner.getItemPost(0);
-        Log.d("Debug","the confirmed Item Title is "+thisSellingItem.getItemTitle());
+        Item thisSellingItem = itemOwner.getItemPost(itemOwner.getPostedItems().size()-1);
+        Log.d("Debug","the confirmed Item Title is : "+thisSellingItem.getItemTitle());
         thisSellingItem.setSold(true);
         MainActivity.CurrentUser.addItemBought(thisSellingItem);
-        MainActivity.EasyTradeDataBase.delete(itemOwner);
+        Log.d("Debug","THE OWNER OF THIS selling item is :"+thisSellingItem.getOwner());
+        Log.d("Debug","The current number of posted item before delete is: ----- "+itemOwner.getPostedItems().size());
+        boolean check = itemOwner.deleteItemPost(thisSellingItem);
+        if (MainActivity.GridFragment.mAdapter != null)
+            MainActivity.GridFragment.mAdapter.notifyDataSetChanged();
+        Log.d("Debug","Is this selling item successfully deleted from the database? ----- "+check);
+        Log.d("Debug","The current number of posted item after delete is: ----- "+itemOwner.getPostedItems().size());
 
-        Intent intent = new Intent(this, tradeSuccess.class);
-        intent.putExtra("sellerName", seller.getText().toString());
-        this.startActivity(intent);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
         //Write Database to disk
         MainActivity.EasyTradeDataBase.sortData();
         MainActivity.EasyTradeDataBase.setITEMID_LOWER_BOUND(MainActivity.EasyTradeDataBase.getITEMID_LOWER_BOUND() + 1);
@@ -107,6 +106,16 @@ public class confirmationActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Intent intent = new Intent(this, tradeSuccess.class);
+        intent.putExtra("sellerName", seller.getText().toString());
+        this.startActivity(intent);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
 
     }
 

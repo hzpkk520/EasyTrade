@@ -8,4 +8,15 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="action_settings">Settings</string>
+    <string-array name="category_array">
+
+    <item>furniture</item>
+
+    <item>motor</item>
+
+    <item>clothes</item>
+
+    <item>book</item>
+
+</string-array>
 </resources>

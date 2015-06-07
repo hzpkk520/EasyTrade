@@ -68,15 +68,19 @@ public class Database implements Serializable {
     }
 
     public void add(User tmpUser){
-        if (indexOf(tmpUser)== -1)
+        Log.d("Debug","Before checking if user already existed");
+        if (!contains(tmpUser)){
+            Log.d("Debug","The User being checked is not in the Database, we should add it");
             myDatabase.add(tmpUser);
-        sortData();
+            sortData();
+        }
     }
 
     public void add(int index, User element){
-        if (indexOf(element)== -1)
+        if (!contains(element)){
             myDatabase.add(index,element);
-        sortData();
+            sortData();
+        }
     }
 
     public boolean addAll(ArrayList<User> c){
@@ -130,10 +134,14 @@ public class Database implements Serializable {
     public ArrayList<User> getCurrentUsers(){
         ArrayList<User> tmpList = new ArrayList<User>();
         for (User user:myDatabase){
-            Item tmpItem = user.getItemPost(0);
-            if (!tmpItem.isSold()){
-                tmpList.add(user);
-                Log.d("Debug", "Item Added to the Adapter itemList");
+            Log.d("Debug", "for ADAPTER DATASET, checking this user: "+user.getUsername());
+            Log.d("Debug", "the Size of this user's postedItems is: "+user.getPostedItems().size());
+            if (user.getPostedItems().size()!=0) {
+                Item tmpItem = user.getItemPost(user.getPostedItems().size()-1);
+                if (!tmpItem.isSold()){
+                    tmpList.add(user);
+                    Log.d("Debug", user.getUsername()+" Added to the Adapter dataset");
+                }
             }
         }
         return tmpList;
@@ -163,6 +171,15 @@ public class Database implements Serializable {
         Collections.sort(myDatabase, my_compare);
         if (MainActivity.GridFragment.mAdapter != null)
             MainActivity.GridFragment.mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String toString() {
+        String tmpString="All the users currently in DATABASE: \n";
+        for (User user:myDatabase){
+            tmpString = tmpString.concat("-"+user.getUsername()+"--");
+        }
+        return tmpString;
     }
 
 }

@@ -39,6 +39,7 @@ public class GridAdapter extends BaseAdapter  {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View gridView;
+        User currentUser = mGridUsers.get(position);
 
         if (convertView == null) {
 
@@ -52,10 +53,10 @@ public class GridAdapter extends BaseAdapter  {
             distanceText = (TextView) gridView.findViewById(R.id.itemDistance);
             priceText = (TextView) gridView.findViewById(R.id.itemPrice);
 
-            User currentUser = mGridUsers.get(position);
-            Log.d("Debug","the size of the user post item is "+ currentUser.getPostedItems().size());
 
-            currentItem = currentUser.getItemPost(0);
+            Log.d("Debug","the size of "+ currentUser.getUsername() + "'s posted item is "+ currentUser.getPostedItems().size());
+
+            currentItem = currentUser.getItemPost(currentUser.getPostedItems().size()-1);
             Log.d("Debug", "Current Item ID: " + currentItem.getItemID());
 
 
@@ -69,7 +70,7 @@ public class GridAdapter extends BaseAdapter  {
 
         } else {
             gridView = (View) convertView;
-            currentItem = mGridUsers.get(position).getItemPost(0);
+            currentItem = mGridUsers.get(position).getItemPost(currentUser.getPostedItems().size()-1);
         }
 
 
