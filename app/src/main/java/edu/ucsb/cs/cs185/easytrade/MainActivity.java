@@ -1,5 +1,6 @@
 package edu.ucsb.cs.cs185.easytrade;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,7 +37,7 @@ import java.util.Comparator;
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, EditFragment.EditLicenseDialogListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -50,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+
     ViewPager mViewPager;
     private static final String TAG = "Debug";
 
@@ -64,29 +66,27 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("Debug","MAINACTIVITY ONCREATE CALLED");
+        Log.d("Debug", "MAINACTIVITY ONCREATE CALLED");
 
         //Read saved Database from local storage
-        try
-        {
+        try {
             File fileIn = new File(Environment.getExternalStorageDirectory(), "EasyTradeDataBase.ser");
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileIn));
             EasyTradeDataBase = (Database) in.readObject();
             in.close();
-        } catch(IOException i) {
+        } catch (IOException i) {
             i.printStackTrace();
-        }
-        catch(ClassNotFoundException c) {
+        } catch (ClassNotFoundException c) {
 
             EasyTradeDataBase = new Database();
 
-            Log.d("Debug","Employee class not found");
+            Log.d("Debug", "Employee class not found");
 //            c.printStackTrace();
         }
 
         Log.d("Debug", "Database may be found, Continue on");
 
-        if (EasyTradeDataBase == null){
+        if (EasyTradeDataBase == null) {
             Log.d("Debug", "Database not found :( ");
             EasyTradeDataBase = new Database();
             loadInDefaultData();
@@ -116,6 +116,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -151,13 +152,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-
     @Override
     public void onStop() {
         super.onStop();
         //Write Database to disk
         sortData();
-        EasyTradeDataBase.setITEMID_LOWER_BOUND(EasyTradeDataBase.getITEMID_LOWER_BOUND()+1);
+        EasyTradeDataBase.setITEMID_LOWER_BOUND(EasyTradeDataBase.getITEMID_LOWER_BOUND() + 1);
         try {
             File outFile = new File(Environment.getExternalStorageDirectory(), "EasyTradeDataBase.ser");
             ObjectOutput out = new ObjectOutputStream(new FileOutputStream(outFile));
@@ -168,6 +168,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -187,9 +188,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
+//        if (id == R.id.edit) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
@@ -206,6 +211,31 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, String value1, String value2, String value3, String value4) {
+
+        TextView sellerName = (TextView) findViewById(R.id.sellerName);
+        TextView sellerPhone = (TextView) findViewById(R.id.sellerPhone);
+
+        TextView sellerEmail = (TextView) findViewById(R.id.sellerEmail);
+        TextView sellerAddress = (TextView) findViewById(R.id.sellerAddress);
+
+
+        sellerName.setText(value1);
+        sellerPhone.setText(value2);
+        sellerEmail.setText(value3);
+        sellerAddress.setText(value4);
+
+        User theCurrentUserInDatabase = EasyTradeDataBase.get(CurrentUser.getUsername());
+        CurrentUser.setUsername(value1);
+        theCurrentUserInDatabase.setUsername(value1);
+        CurrentUser.setPhoneNumber(value2);
+        theCurrentUserInDatabase.setPhoneNumber(value2);
+        CurrentUser.setAddress(value4);
+        theCurrentUserInDatabase.setAddress(value4);
+        return;
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -220,9 +250,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 0){
-                Log.d(TAG,"Ready to call GridFragment");
-                return GridFragment.newInstance(position +1);
+            if (position == 0) {
+                Log.d(TAG, "Ready to call GridFragment");
+                return GridFragment.newInstance(position + 1);
             }
 
             return PlaceholderFragment.newInstance(position + 1);
@@ -250,11 +280,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-
     /**
      * A StaggeredGrid fragment containing a grid view.
      */
-    public static class GridFragment extends Fragment{
+    public static class GridFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -266,6 +295,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         private GridView mGridView;
         public static GridAdapter mAdapter;
         public ArrayList<User> usersShownInGrid;
+
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -285,10 +315,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            Log.d(TAG,"calling onCreateView in StaggeredFragment");
+            Log.d(TAG, "calling onCreateView in StaggeredFragment");
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView theTextView = (TextView)rootView.findViewById(R.id.section_label);
+            TextView theTextView = (TextView) rootView.findViewById(R.id.section_label);
             theTextView.setVisibility(View.GONE);
 //            int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
 //            theTextView.setText("Section "+sectionNumber);
@@ -314,13 +344,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             mGridView = (GridView) getActivity().findViewById(R.id.grid_view);
 
             usersShownInGrid = getUsersShownInGrid();
-            Log.d(TAG,"SIZE of usersShownInGrid is: "+usersShownInGrid.size());
+            Log.d(TAG, "SIZE of usersShownInGrid is: " + usersShownInGrid.size());
 
 //            if (mAdapter == null) {
 //                mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
 //            }
-            mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
+            mAdapter = new GridAdapter(getActivity(), usersShownInGrid);
 
+//            Log.d(TAG, "setting Adapter for mGridView in StaggeredFragment");
+//            Log.d(TAG, "the size of the data base is " + EasyTradeDataBase.size());
             Log.d(TAG,"setting Adapter for mGridView in StaggeredFragment");
             Log.d(TAG, "THE SIZE OF THE DATABASE IS: " + EasyTradeDataBase.size());
             Log.d(TAG, EasyTradeDataBase.toString());
@@ -348,7 +380,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
                     intent.putExtra("userName", USERNAME_TO_PASS);
 //                    intent.putExtra("parentActivity",0);
-                    Toast.makeText(getActivity(), "Item "+ position + " clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Item " + position + " clicked", Toast.LENGTH_SHORT).show();
 
                     getActivity().startActivity(intent);
                 }
@@ -356,9 +388,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         }
 
-
-
-        public ArrayList<User> getUsersShownInGrid(){
+        public ArrayList<User> getUsersShownInGrid() {
             return EasyTradeDataBase.getCurrentUsers();
         }
 //        @Override
@@ -405,6 +435,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private ListView listView;
+        private Button editProfile;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -426,9 +457,36 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_sellerinfo, container, false);
 
+            editProfile = (Button) rootView.findViewById(R.id.editButton);
+            editProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogFragment newFragment = new EditFragment();
+                    newFragment.show(getActivity().getFragmentManager(), "EditProfile");
+                }
+            });
+
             listView = (ListView) rootView.findViewById(R.id.listview);
             listView.setAdapter(new listViewAdapter(this, new String[]{"Bought items",
                     "Sold items"}));
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // When clicked, show a toast with the TextView text
+                    if (position == 0) {
+                        //code specific to first list item
+                        Intent myIntent = new Intent(view.getContext(), listViewBoughtItems.class);
+//                        myIntent.putExtra("", CurrentUser.getUsername());
+                        startActivityForResult(myIntent, 0);
+                    }
+
+                    if (position == 1) {
+                        //code specific to 2nd list item
+                        Intent myIntent = new Intent(view.getContext(), listViewSoldItems.class);
+                        startActivityForResult(myIntent, 0);
+                    }
+                }
+            });
             Button postButton = (Button) rootView.findViewById(R.id.postButton);
             postButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -443,13 +501,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-
     //Helper Functions
 
     //a Comparator interface for ordering the files when loaded to myDataSet
     public class fileCompare implements Comparator<User> {
         @Override
-        public int compare(User o1, User o2){
+        public int compare(User o1, User o2) {
             /*By default:
             returns <0 if o1 <o2
             returns ==0 if o1==o2
@@ -528,7 +585,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         convertAndAdd(R.drawable.minifridge1, user4, item4);
         convertAndAdd(R.drawable.minifridge2,user4,item4);
-        convertAndAdd(R.drawable.minifridge3,user4,item4);
+        convertAndAdd(R.drawable.minifridge3, user4,item4);
         Log.d("Debug", "Adding fifth Users item image done");
         Log.d("Debug", "Finished adding all the images");
 

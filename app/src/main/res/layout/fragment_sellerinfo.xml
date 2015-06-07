@@ -14,12 +14,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/publicProfile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:text="PUBLIC PROFILE"
             android:textColor="#000" />
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="Edit"
+            android:textColor="#FFF"
+            android:background="@color/theme400"
+            android:layout_marginRight="5dp"
+            />
     </RelativeLayout>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -166,7 +178,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="150dp"
                 android:layout_below="@id/header2"
-
                 >
             </ListView>
 

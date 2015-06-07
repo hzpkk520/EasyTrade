@@ -70,7 +70,8 @@ public class GridAdapter extends BaseAdapter  {
 
         } else {
             gridView = (View) convertView;
-            currentItem = mGridUsers.get(position).getItemPost(currentUser.getPostedItems().size()-1);
+            if (currentUser.getPostedItems().size()!=0)
+                currentItem = currentUser.getItemPost(currentUser.getPostedItems().size()-1);
         }
 
 

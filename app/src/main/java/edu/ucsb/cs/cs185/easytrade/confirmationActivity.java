@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +34,8 @@ public class confirmationActivity extends ActionBarActivity {
     private TextView itemPrice2;
     private TextView seller;
     private TextView itemCondition;
+    private ImageView itemImage;
+    private File itemPic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,8 @@ public class confirmationActivity extends ActionBarActivity {
         seller = (TextView)findViewById(R.id.seller);
         itemCondition = (TextView)findViewById(R.id.itemCondition);
         confirmButton = (Button)findViewById(R.id.confirmButton);
+        itemImage = (ImageView)findViewById(R.id.itemImage);
+
 
 
         Intent intent = getIntent();
@@ -57,6 +64,17 @@ public class confirmationActivity extends ActionBarActivity {
         String str4 = intent.getStringExtra("itemCondition");
         itemCondition.setText(str4);
 
+        int i = intent.getIntExtra("itemPicture", 0);
+        if (i!=0) {
+//            itemImage.setImageResource(i);
+            Picasso.with(this).load(i).
+                    resize(150,200).centerCrop().into(itemImage);
+        }
+        else{
+            itemPic = MainActivity.EasyTradeDataBase.get(str3).getItemPost(0).getItemImages().get(0);
+            Picasso.with(this).load(itemPic).
+                    resize(150,200).centerCrop().into(itemImage);
+        }
 
     }
 
@@ -86,11 +104,14 @@ public class confirmationActivity extends ActionBarActivity {
         Log.d("Debug","the confirmed Item Title is : "+thisSellingItem.getItemTitle());
         thisSellingItem.setSold(true);
         MainActivity.CurrentUser.addItemBought(thisSellingItem);
+        MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername()).addItemBought(thisSellingItem);
         Log.d("Debug","THE OWNER OF THIS selling item is :"+thisSellingItem.getOwner());
         Log.d("Debug","The current number of posted item before delete is: ----- "+itemOwner.getPostedItems().size());
         boolean check = itemOwner.deleteItemPost(thisSellingItem);
-        if (MainActivity.GridFragment.mAdapter != null)
+        if (MainActivity.GridFragment.mAdapter != null) {
+            Log.d("Debug","Calling GridAdapter notifyDatasetChanged");
             MainActivity.GridFragment.mAdapter.notifyDataSetChanged();
+        }
         Log.d("Debug","Is this selling item successfully deleted from the database? ----- "+check);
         Log.d("Debug","The current number of posted item after delete is: ----- "+itemOwner.getPostedItems().size());
 
@@ -106,6 +127,8 @@ public class confirmationActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Log.d("Debug","Database written to Disk completed.......");
 
         Intent intent = new Intent(this, tradeSuccess.class);
         intent.putExtra("sellerName", seller.getText().toString());

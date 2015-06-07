@@ -19,6 +19,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +48,9 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
     private TextView price;
     private TextView category;
     private ArrayList<Integer> drawableArray;
+    private ArrayList<File> fileArray;
     private int arraySize;
+    private int fileArraySize;
     private Item item;
     private String sellerName;
     private String titleName;
@@ -74,6 +77,8 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
         itemID = item.getItemID();
         drawableArray = item.getDrawablesForSampleUsers();
         arraySize = drawableArray.size();
+        fileArray = item.getItemImages();
+        fileArraySize = fileArray.size();
         Log.d("Debug", "Sample Drawable size is  " + arraySize);
         sellerName = user.getUsername();
         titleName = item.getItemTitle();
@@ -82,6 +87,7 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
         itemCondition = item.getCondition();
         itemPrice = item.getPrice().substring(1);
         itemCategory = item.getCategory();
+
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         itemTitle = (TextView) findViewById(R.id.itemTitle);
@@ -114,26 +120,58 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
 //        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
 //        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
 
-        for (int i = 0; i < arraySize; i++) {
-            file_maps.put(" " + i, drawableArray.get(i));
+        //if not the sample users
+        if ((sellerName.equals("JackBacon") ) || (sellerName .equals("ScottCesar")) || (sellerName .equals("JenniChou") ) || (sellerName .equals("KobeHollerer") ) || (sellerName .equals("CoryFeitelson") )) {
+
+            HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+
+            for (int i = 0; i < arraySize; i++) {
+                file_maps.put(" " + i, drawableArray.get(i));
+            }
+            for (String name : file_maps.keySet()) {
+                TextSliderView textSliderView = new TextSliderView(this);
+                // initialize a SliderLayout
+                textSliderView
+                        .image(file_maps.get(name))
+                        .setScaleType(BaseSliderView.ScaleType.Fit)
+                        .setOnSliderClickListener(this);
+
+                //add your extra information
+                textSliderView.bundle(new Bundle());
+                textSliderView.getBundle()
+                        .putString("extra", name);
+
+                mDemoSlider.addSlider(textSliderView);
+                Log.d("Debug", "Read in file path is  ------------------" );
+
+            }
         }
-        for (String name : file_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
+        else{
 
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
+            HashMap<String, File> file_maps = new HashMap<String, File>();
 
-            mDemoSlider.addSlider(textSliderView);
+            for (int i = 0; i < fileArraySize; i++) {
+                file_maps.put(" " + i, MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername()).getPostedItems().get(0).getImage(i));
+            }
+            for (String name : file_maps.keySet()) {
+                TextSliderView textSliderView = new TextSliderView(this);
+//                Log.d("Debug", "Read in file path is " + MainActivity.CurrentUser.getPostedItems().get(0).getImage(0).getAbsolutePath());
+                // initialize a SliderLayout
+                textSliderView
+                        .image(file_maps.get(name))
+                        .setScaleType(BaseSliderView.ScaleType.Fit)
+                        .setOnSliderClickListener(this);
+
+                //add your extra information
+                textSliderView.bundle(new Bundle());
+                textSliderView.getBundle()
+                        .putString("extra", "1");
+
+                mDemoSlider.addSlider(textSliderView);
+            }
         }
+
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOut);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 //        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -152,6 +190,9 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
         intent.putExtra("price", price.getText().toString());
         intent.putExtra("sellerName", sellerId.getText().toString());
         intent.putExtra("itemCondition", condition.getText().toString());
+        if (drawableArray.size() != 0) {
+            intent.putExtra("itemPicture", drawableArray.get(0));
+        }
         this.startActivity(intent);
     }
 
