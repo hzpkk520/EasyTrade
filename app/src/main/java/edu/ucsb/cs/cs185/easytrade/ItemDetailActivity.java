@@ -152,7 +152,8 @@ public class ItemDetailActivity extends ActionBarActivity implements BaseSliderV
             HashMap<String, File> file_maps = new HashMap<String, File>();
 
             for (int i = 0; i < fileArraySize; i++) {
-                file_maps.put(" " + i, MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername()).getPostedItems().get(0).getImage(i));
+                User theCurrentUserInDataBase = MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername());
+                file_maps.put(" " + i, theCurrentUserInDataBase.getPostedItems().get(theCurrentUserInDataBase.getPostedItems().size()-1).getImage(i));
             }
             for (String name : file_maps.keySet()) {
                 TextSliderView textSliderView = new TextSliderView(this);
