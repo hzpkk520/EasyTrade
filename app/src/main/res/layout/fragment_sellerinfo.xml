@@ -206,7 +206,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/rounded_button"
-        android:text="I want to post items"
+        android:text="I want to post item"
         android:textColor="#FFF"
         android:textSize="22sp" />
 

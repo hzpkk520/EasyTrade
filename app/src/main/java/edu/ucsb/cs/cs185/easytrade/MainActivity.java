@@ -454,8 +454,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             });
 
             listView = (ListView) rootView.findViewById(R.id.listview);
-            listView.setAdapter(new listViewAdapter(this, new String[]{"Bought items",
-                    "Sold items"}));
+            listView.setAdapter(new listViewAdapter(this, new String[]{"Saved items",
+                    "Posted items"}));
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
