@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:text="Edit"
             android:textColor="#FFF"
-            android:background="@color/theme400"
+            android:background="@drawable/rounded_button"
             android:layout_marginRight="5dp"
             />
     </RelativeLayout>
