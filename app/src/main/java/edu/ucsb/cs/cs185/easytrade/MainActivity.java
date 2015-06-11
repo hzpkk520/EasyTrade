@@ -389,7 +389,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
                     intent.putExtra("userName", USERNAME_TO_PASS);
 //                    intent.putExtra("parentActivity",0);
-                    Toast.makeText(getActivity(), "Item " + position + " clicked", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Item " + position + " clicked", Toast.LENGTH_SHORT).show();
 
                     getActivity().startActivity(intent);
                 }

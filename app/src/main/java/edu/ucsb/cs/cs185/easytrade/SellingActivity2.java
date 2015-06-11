@@ -211,7 +211,7 @@ private int REQUEST_CAMERA =0;
 
             public void confirm (View view){
         if(next_free_imageView!=0){
-            Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
             MainActivity.CurrentUser.addItemPost(SellingActivity.currentItem);
             MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername()).addItemPost(SellingActivity.currentItem);
             if (MainActivity.GridFragment.mAdapter != null)
@@ -361,7 +361,7 @@ private int REQUEST_CAMERA =0;
                 isTaken=true;
                 next_free_imageView++;
                 SellingActivity.currentItem.addImage(destination);
-                Toast.makeText(this, "bbbb" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "bbbb" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
 
             } else if (requestCode == SELECT_FILE) {
                 Uri selectedImageUri = data.getData();
@@ -408,7 +408,7 @@ private int REQUEST_CAMERA =0;
                 next_free_imageView++;
                 SellingActivity.currentItem.addImage(destination);
                 File_list.add(destination);
-                Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
             }
         }
     }

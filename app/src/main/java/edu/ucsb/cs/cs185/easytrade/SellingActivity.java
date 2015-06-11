@@ -173,7 +173,7 @@ public class SellingActivity extends ActionBarActivity {
 
                     //  Editable editable = "";
                     //  if(title.getText()=="")
-                    Toast.makeText(this, "aa" + title.getText().toString().length() + "aa", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, "aa" + title.getText().toString().length() + "aa", Toast.LENGTH_LONG).show();
                     ///////////////////get text here and save to database
                     Intent intent = new Intent(SellingActivity.this, SellingActivity2.class);
                     //  intent.putExtra("path", image.getAbsolutePath());
@@ -247,7 +247,7 @@ public class SellingActivity extends ActionBarActivity {
   /*  public String getPath(Uri uri) {
         // just some safety built in
         if( uri == null ) {
-            // TODO perform some logging or show user feedback
+            //perform some logging or show user feedback
             return null;
         }
         // try to retrieve the image from the media store first
