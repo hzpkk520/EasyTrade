@@ -43,9 +43,7 @@ public class GridAdapter extends BaseAdapter  {
 
         if (convertView == null) {
 
-//            gridView = new View(context);
 
-            // get layout from mobile.xml
             gridView = inflater.inflate(R.layout.single_grid, null);
 
             myGridImage = (ImageView) gridView.findViewById(R.id.gridImage);

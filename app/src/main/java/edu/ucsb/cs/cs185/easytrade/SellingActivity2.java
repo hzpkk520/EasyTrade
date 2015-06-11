@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,14 +17,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -67,13 +63,8 @@ private int REQUEST_CAMERA =0;
  private boolean isTaken=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selling_activity2);
-        //     Toast.makeText(this, "newActivity", Toast.LENGTH_SHORT).show();
-        //  super.onCreate(savedInstanceState);
-        //   setContentView(R.layout.activity1_main);
-
 
         Intent intent = getIntent();
         Button1=(ImageView) findViewById(R.id.delete_one);
@@ -116,17 +107,6 @@ private int REQUEST_CAMERA =0;
         TextList.get(4).setVisibility(View.INVISIBLE);
 
 
-        //   String value = intent.getStringExtra("path");
-
-        //  Drawable myDrawable = getResources().getDrawable(R.drawable.ucsbmap);
-        // anImage = BitmapFactory.decodeFile(value);
-
-
-     /*    customImageView = (CustomZoomView) findViewById(R.id.customZoomView);
-
-
-        Bitmap anImage      = BitmapFactory.decodeFile(value);
-        customImageView.setBitmap(anImage);*/
 
     }
 
@@ -211,7 +191,6 @@ private int REQUEST_CAMERA =0;
 
             public void confirm (View view){
         if(next_free_imageView!=0){
-//            Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
             MainActivity.CurrentUser.addItemPost(SellingActivity.currentItem);
             MainActivity.EasyTradeDataBase.get(MainActivity.CurrentUser.getUsername()).addItemPost(SellingActivity.currentItem);
             if (MainActivity.GridFragment.mAdapter != null)
@@ -232,15 +211,12 @@ private int REQUEST_CAMERA =0;
         final CharSequence[] items = { "Done" };
         AlertDialog.Builder builder = new AlertDialog.Builder(SellingActivity2.this);
         builder.setTitle("Item Successfully Posted");
-//        builder.setMessage("Item Posted");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
             if (items[item].equals("Done")) {
-                  //  dialog.dismiss();
                 Intent intent= new Intent(SellingActivity2.this,MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //  intent.putExtra("path", image.getAbsolutePath());
                 SellingActivity2.this.startActivity(intent);
                 }
             }
@@ -255,9 +231,7 @@ private int REQUEST_CAMERA =0;
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].equals("OK")) {
                           dialog.dismiss();
-                  //      Intent intent= new Intent(SellingActivity2.this,MainActivity.class);
-                        //  intent.putExtra("path", image.getAbsolutePath());
-                     //   SellingActivity2.this.startActivity(intent);
+
                     }
                 }
             });
@@ -277,9 +251,7 @@ private int REQUEST_CAMERA =0;
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].equals("OK")) {
                         dialog.dismiss();
-                        //      Intent intent= new Intent(SellingActivity2.this,MainActivity.class);
-                        //  intent.putExtra("path", image.getAbsolutePath());
-                        //   SellingActivity2.this.startActivity(intent);
+
                     }
                 }
             });
@@ -330,8 +302,7 @@ private int REQUEST_CAMERA =0;
                 }
                 String imageFileName =  String.valueOf( System.currentTimeMillis());
                 destination = new File(storageDir,imageFileName+".jpg");
-               //  destination = new File(Environment.getExternalStorageDirectory()+"/EasyTrade/",
-              //          System.currentTimeMillis() + ".jpg");
+
                 File_list.add(destination);
 
                 FileOutputStream fo;
@@ -349,7 +320,6 @@ private int REQUEST_CAMERA =0;
                 ImageList.get(next_free_imageView).setVisibility(View.VISIBLE);
                 TextList.get(next_free_imageView).setVisibility(View.INVISIBLE);
                 TextList.get(next_free_imageView+1).setVisibility(View.VISIBLE);
-                //ImageList.get(next_free_imageView).setImageBitmap(thumbnail);
                 Picasso.with(this).load(destination).centerCrop().resize(ImageList.get(next_free_imageView).getWidth()-20, ImageList.get(next_free_imageView).getHeight()).into(ImageList.get(next_free_imageView));
                 for(int i=0;i<4;i++) {
                     if(i==next_free_imageView)
@@ -361,7 +331,6 @@ private int REQUEST_CAMERA =0;
                 isTaken=true;
                 next_free_imageView++;
                 SellingActivity.currentItem.addImage(destination);
-//                Toast.makeText(this, "bbbb" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
 
             } else if (requestCode == SELECT_FILE) {
                 Uri selectedImageUri = data.getData();
@@ -374,27 +343,13 @@ private int REQUEST_CAMERA =0;
                 String selectedImagePath = cursor.getString(column_index);*/
                 selectedImagePath = getPath(selectedImageUri);
                     destination =  new File (selectedImagePath);
-             //   Bitmap bm;
-               // BitmapFactory.Options options = new BitmapFactory.Options();
-                //options.inJustDecodeBounds = true;
-                //BitmapFactory.decodeFile(selectedImagePath, options);
-               // final int REQUIRED_SIZE = 200;
-               // int scale = 1;
-               // while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-               //         && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-              //      scale *= 2;
-             //   options.inSampleSize = scale;
-           //     options.inJustDecodeBounds = false;
-                //bm = BitmapFactory.decodeFile(selectedImagePath);
+
 
                 ImageList.get(next_free_imageView).setVisibility(View.VISIBLE);
                 TextList.get(next_free_imageView).setVisibility(View.INVISIBLE);
                 TextList.get(next_free_imageView+1).setVisibility(View.VISIBLE);
-             //   bm.setWidth(ImageList.get(next_free_imageView).getWidth());
-               // bm.setHeight(ImageList.get(next_free_imageView).getHeight());
+
                 Picasso.with(this).load(selectedImageUri).resize(ImageList.get(next_free_imageView).getWidth()-20, ImageList.get(next_free_imageView).getHeight()).into(ImageList.get(next_free_imageView));
-              //  bm.createScaledBitmap(bm,250,150,false);
-               // ImageList.get(next_free_imageView).setImageBitmap(bm);
 
                 for(int i=0;i<4;i++) {
                     if(i==next_free_imageView)
@@ -408,7 +363,6 @@ private int REQUEST_CAMERA =0;
                 next_free_imageView++;
                 SellingActivity.currentItem.addImage(destination);
                 File_list.add(destination);
-//                Toast.makeText(this, "aa" + SellingActivity.currentItem.getItemImages().contains(destination), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -428,40 +382,12 @@ private int REQUEST_CAMERA =0;
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        //  if (id == R.id.action_settings) {
-        //        return true;
-        //    }
-        //    if(id==R.id.home){
-        //      Intent intent= new Intent(this,MainActivity.class);
-        // intent.putExtra("path", image.getAbsolutePath());
-        //       this.startActivity(intent);
-        //       return true;
-        //        this.finish();
-        //          return true;
-        //     }
-        //   if(id==R.id.select){
-
-        // Bitmap anImage      = BitmapFactory.decodeFile(selectedImagePath);
-        //  customImageView.setBitmap(anImage);
-
-        //   return true;
-        // }
-        //      if(id==R.id.back){
-        //  Toast.makeText(this, "back clicked", Toast.LENGTH_SHORT).show();
-        //        Intent intent= new Intent(this,MainActivity.class);
-        // intent.putExtra("path", image.getAbsolutePath());
-        //      this.startActivity(intent);
-        //   return true;
-        // }
-
         return super.onOptionsItemSelected(item);
     }
 
     public String getPath(Uri uri) {
         // just some safety built in
         if( uri == null ) {
-            // TODO perform some logging or show user feedback
             return null;
         }
         // try to retrieve the image from the media store first

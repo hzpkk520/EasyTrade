@@ -8,15 +8,31 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="action_settings">Settings</string>
+
+
     <string-array name="category_array">
 
-    <item>furniture</item>
+        <item>Furniture</item>
+        <item>Electronics</item>
+        <item>Makeups</item>
+        <item>Appliances</item>
+        <item>Baby</item>
+        <item>CDs</item>
+        <item>Cell Phones and Accessories</item>
+        <item>Jewelry</item>
+        <item>Academic</item>
+        <item>Computers</item>
+        <item>Grocery</item>
+        <item>Health and Personal Care</item>
+        <item>Home and Kitchen</item>
+        <item>Industrial and Scientific</item>
+        <item>Luxury</item>
+        <item>Software</item>
+        <item>Sports</item>
+        <item>Tools and Home Improvement</item>
+        <item>Toys and Games</item>
 
-    <item>motor</item>
+    </string-array>
 
-    <item>clothes</item>
 
-    <item>book</item>
-
-</string-array>
 </resources>

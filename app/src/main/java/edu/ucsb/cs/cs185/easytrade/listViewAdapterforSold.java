@@ -17,7 +17,6 @@ public class listViewAdapterforSold extends BaseAdapter {
     private static LayoutInflater inflater = null;
 
     public listViewAdapterforSold(listViewSoldItems fragment, String[] data) {
-        // TODO Auto-generated constructor stub
         this.context = fragment;
         this.data = data;
         inflater = (LayoutInflater) fragment
@@ -26,25 +25,21 @@ public class listViewAdapterforSold extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return data.length;
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return data[position];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         View vi = convertView;
         if (vi == null)
             vi = inflater.inflate(R.layout.row, null);

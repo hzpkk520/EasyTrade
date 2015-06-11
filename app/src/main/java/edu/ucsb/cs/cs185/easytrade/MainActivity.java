@@ -184,14 +184,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        if (id == R.id.edit) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -281,8 +273,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return getString(R.string.title_section1).toUpperCase(l);
                 case 1:
                     return getString(R.string.title_section2).toUpperCase(l);
-//                case 2:
-//                    return getString(R.string.title_section3).toUpperCase(l);
+
             }
             return null;
         }
@@ -329,8 +320,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView theTextView = (TextView) rootView.findViewById(R.id.section_label);
             theTextView.setVisibility(View.GONE);
-//            int sectionNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-//            theTextView.setText("Section "+sectionNumber);
+
             return rootView;
         }
 
@@ -355,13 +345,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             usersShownInGrid = getUsersShownInGrid();
             Log.d(TAG, "SIZE of usersShownInGrid is: " + usersShownInGrid.size());
 
-//            if (mAdapter == null) {
-//                mAdapter = new GridAdapter(getActivity(),usersShownInGrid);
-//            }
             mAdapter = new GridAdapter(getActivity(), usersShownInGrid);
 
-//            Log.d(TAG, "setting Adapter for mGridView in StaggeredFragment");
-//            Log.d(TAG, "the size of the data base is " + EasyTradeDataBase.size());
+
             Log.d(TAG,"setting Adapter for mGridView in StaggeredFragment");
             Log.d(TAG, "THE SIZE OF THE DATABASE IS: " + EasyTradeDataBase.size());
             Log.d(TAG, EasyTradeDataBase.toString());
@@ -388,8 +374,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     USERNAME_TO_PASS = usersShownInGrid.get(position).getUsername();
                     Intent intent = new Intent(getActivity(), ItemDetailActivity.class);
                     intent.putExtra("userName", USERNAME_TO_PASS);
-//                    intent.putExtra("parentActivity",0);
-//                    Toast.makeText(getActivity(), "Item " + position + " clicked", Toast.LENGTH_SHORT).show();
+
 
                     getActivity().startActivity(intent);
                 }
@@ -581,9 +566,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
 
     public void convertAndAdd(int drawable, User user, Item item){
-//        String path = "android.resource://" + getPackageName() + "/" + drawable;
-//        File tmpFile = new File(URI.create(path));
-//        File file1User0 = convertDrawableToFile(drawable);
 
         item.getDrawablesForSampleUsers().add(drawable);
         user.addItemPost(item);
@@ -591,26 +573,5 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-//    public File convertDrawableToFile(int drawable) {
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawable);
-//        File f = new File(getCacheDir(), String.valueOf(drawable));
-//        FileOutputStream out = null;
-//        try {
-//            out = new FileOutputStream(f);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out); // bmp is your Bitmap instance
-//            // PNG is a lossless format, the compression factor (100) is ignored
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (out != null) {
-//                    out.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return f;
-//    }
 
 }

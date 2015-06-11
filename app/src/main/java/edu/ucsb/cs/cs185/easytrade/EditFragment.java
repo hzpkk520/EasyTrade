@@ -85,21 +85,7 @@ public class EditFragment extends DialogFragment {
                             value2 = new StringBuilder(value2).insert(8, "-").toString();
                         }
 
-//                        if (value1.equals("") || value2.equals("") || value3.equals("") || value4.equals("")) {
-//                            final CharSequence[] items = { "Done" };
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                            builder.setTitle("Please fill in all areas");
-//                            builder.setItems(items, new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int item) {
-//                                    if (items[item].equals("Done")) {
-//                                        dialog.dismiss();
-//
-//                                    }
-//                                }
-//                            });
-//                            builder.show();
-//                        }
+
                         if (value1.equals("")) {
                             value1 = "";
                         }
