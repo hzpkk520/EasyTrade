@@ -1,7 +1,7 @@
 # EasyTrade
 A simple location-based Android trading application
 
- - This  Android application __focuses on User Interface Design__. 
+ - This  Android application __focusing on User Interface Design__. 
  - Users can view used items posted around their location; they can also post items they want to sell.
  - It offers as a trading platform for both item sellers and buyers.
 
